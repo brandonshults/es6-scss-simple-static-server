@@ -13,9 +13,9 @@ var gulp = require('gulp'),
 
 var paths = {
     src: {
-      js: 'assets/js/**.js',
-      scss: 'assets/scss/sass/**.scss',
-      html: 'views/**.html'        
+      js: 'assets/js/**/*.js',
+      scss: 'assets/scss/sass/**/*.scss',
+      html: 'views/**/*.html'        
     },
     dest: {
       js: 'public/js',
@@ -29,7 +29,7 @@ gulp.task('clean', function (cb) {
 });
 
 gulp.task('scss', function () {
-  return sass(paths.src.scss.replace(/\*\*\.scss/, ''))
+  return sass(paths.src.scss.replace(/\*\*\/\*.scss/, ''))
     .on('error', function (err) {
       console.error('Error', err.message);
     })
