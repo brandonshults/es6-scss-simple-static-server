@@ -1,7 +1,8 @@
-class TestClass {
+import test from "./test";
+export default class TestClass {
   constructor() {
-    console.log('this is a test');
+    test();
   }
 }
 
-var test = new TestClass();
+var test2 = new TestClass();
