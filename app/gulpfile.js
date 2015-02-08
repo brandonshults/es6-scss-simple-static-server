@@ -49,7 +49,7 @@ gulp.task('js', ['lint'], function () {
     .pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('bundleJs', function () {
+gulp.task('js', function () {
   var bundleJsDirectory = function () {
     readdir.readSync(paths.removeWildcards(paths.src.js), ['*.js']).forEach(function (fileName) {
         browserify(paths.removeWildcards(paths.src.js) + fileName, {debug: true})
@@ -76,7 +76,7 @@ gulp.task('html', function () {
 });
 
 gulp.task('compile-resources', ['clean'], function () {
-  return gulp.start('scss', 'bundleJs', 'html');
+  return gulp.start('scss', 'js', 'html');
 });
 
 gulp.task('watch', function () {
