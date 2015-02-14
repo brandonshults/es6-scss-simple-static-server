@@ -41,32 +41,19 @@ gulp.task('lint', function () {
 });
 
 gulp.task('js', ['lint'], function () {
-  return gulp.src(paths.src.js)
-    .pipe(transpileModules({
-      formatter: 'commonjs'
-    }))
-    .pipe(gulp.dest(paths.dest.js))
-    .pipe(browserSync.reload({stream: true}));
-});
-
-gulp.task('js', function () {
-  var bundleJsDirectory = function () {
-    readdir.readSync(paths.removeWildcards(paths.src.js), ['*.js']).forEach(function (fileName) {
-        browserify(paths.removeWildcards(paths.src.js) + fileName, {debug: true})
-          .transform(to5ify)
-          .transform(uglifyify)
-          .bundle()
-          .pipe(source(paths.removeWildcards(paths.dest.js) + fileName))
-          .pipe(buffer())
-          .pipe(sourcemaps.init({loadMaps: true}))
-          .pipe(sourcemaps.write('./'))
-          .pipe(replace(/\/\/\# sourceMappingURL\=\.\.\/\.\.\/public/, "//# sourceMappingURL="))
-          .pipe(gulp.dest('./'))
-          .pipe(browserSync.reload({stream: true}));
-      });
-  };
-
-  return bundleJsDirectory();
+  return readdir.readSync(paths.removeWildcards(paths.src.js), ['*.js']).forEach(function (fileName) {
+    browserify(paths.removeWildcards(paths.src.js) + fileName, {debug: true})
+      .transform(to5ify)
+      .transform(uglifyify)
+      .bundle()
+      .pipe(source(paths.removeWildcards(paths.dest.js) + fileName))
+      .pipe(buffer())
+      .pipe(sourcemaps.init({loadMaps: true}))
+      .pipe(sourcemaps.write('./'))
+      .pipe(replace(/\/\/\# sourceMappingURL\=\.\.\/\.\.\/public/, "//# sourceMappingURL="))
+      .pipe(gulp.dest('./'))
+      .pipe(browserSync.reload({stream: true}));
+  });
 });
 
 gulp.task('html', function () {
