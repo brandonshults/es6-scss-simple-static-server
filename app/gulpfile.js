@@ -12,7 +12,7 @@ var gulp = require('gulp'),
   source = require('vinyl-source-stream'),
   replace = require('gulp-replace'),
   readdir = require('readdir'),
-  to5ify = require('6to5ify'),
+  babelify = require('babelify'),
   uglifyify = require('uglifyify');
 
 var paths = require('./config/paths');
@@ -43,7 +43,7 @@ gulp.task('lint', function () {
 gulp.task('js', ['lint'], function () {
   return readdir.readSync(paths.removeWildcards(paths.src.js), ['*.js']).forEach(function (fileName) {
     browserify(paths.removeWildcards(paths.src.js) + fileName, {debug: true})
-      .transform(to5ify)
+      .transform(babelify)
       .transform(uglifyify)
       .bundle()
       .pipe(source(paths.removeWildcards(paths.dest.js) + fileName))

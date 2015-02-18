@@ -20,8 +20,8 @@
     "vinyl-source-stream": "~1.0.0",
     "gulp-replace": "~0.5.2",
     "readdir": "0.0.13",
-    "6to5ify": "~4.1.0",
-    "uglifyify": "~3.0.1"
+    "uglifyify": "~3.0.1",
+    "babelify": "~5.0.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
